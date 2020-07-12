@@ -1,0 +1,59 @@
+id: bad_adapter
+label: adapter
+category: '[bad]'
+
+templates:
+  imports: import bad
+  make: bad.adapter_${type}${type}(${ivlen}, ${iitems}, ${ovlen}, ${oitems})
+
+#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
+#     Keys include:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label (label shown in the GUI)
+#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+parameters:
+- id: type
+  label: Type
+  dtype: enum
+  options: [b, s, i, f, c]
+  option_labels: [Byte, Short, Int, Float, Complex]
+  option_attributes:
+    io: [byte, short, int, float, complex]
+    table: [byte_vector, short_vector, int_vector, float_vector, complex_vector]
+
+- id: ivlen
+  label: Input vector length
+  dtype: int
+
+- id: iitems
+  label: Number of input items
+  dtype: int
+
+- id: ovlen
+  label: Output vector length
+  dtype: int
+
+- id: oitems
+  label: Number of output items
+  dtype: int
+
+#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
+#  Keys include:
+#      * label (an identifier for the GUI)
+#      * domain (optional - stream or message. Default is stream)
+#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#      * vlen (optional - data stream vector length. Default is 1)
+#      * optional (optional - set to 1 for optional inputs. Default is 0)
+inputs:
+- label: in
+  dtype: ${type.io}
+  vlen: ${ivlen}
+
+outputs:
+- label: out
+  dtype: ${type.io}
+  vlen: ${ovlen}
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1
