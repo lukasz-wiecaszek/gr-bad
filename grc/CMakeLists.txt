@@ -32,5 +32,7 @@ install(FILES
     bad_depuncturing.block.yml
     bad_convolutional_decoder.block.yml
     bad_energy_dispersal_descrambler.block.yml
-    bad_adapter.block.yml DESTINATION share/gnuradio/grc/blocks
+    bad_adapter.block.yml
+    bad_ofdm_symbols_selector.block.yml
+    bad_cus_selector.block.yml DESTINATION share/gnuradio/grc/blocks
 )

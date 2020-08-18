@@ -47,7 +47,7 @@ namespace gr {
        * class. bad::adapter::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int ivlen, int iitems, int ovlen, int oitems);
+      static sptr make(int ivlen, int iitems, int ovlen, int oitems, const char *tag_name);
     };
 
     using adapter_bb = adapter<std::uint8_t, std::uint8_t>;

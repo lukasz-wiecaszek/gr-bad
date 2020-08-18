@@ -37,5 +37,7 @@ install(FILES
     depuncturing.h
     convolutional_decoder.h
     energy_dispersal_descrambler.h
-    adapter.h DESTINATION include/bad
+    adapter.h
+    ofdm_symbols_selector.h
+    cus_selector.h DESTINATION include/bad
 )

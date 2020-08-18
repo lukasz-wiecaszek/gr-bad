@@ -18,40 +18,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_ADAPTER_IMPL_H
-#define INCLUDED_BAD_ADAPTER_IMPL_H
+#ifndef INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_H
+#define INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_H
 
-#include <bad/adapter.h>
-#include <string>
+#include <bad/api.h>
+#include <gnuradio/block.h>
 
 namespace gr {
   namespace bad {
 
-    template<typename ITYPE0, typename OTYPE0>
-    class adapter_impl : public adapter<ITYPE0, OTYPE0>
+    /*!
+     * \brief <+description of block+>
+     * \ingroup bad
+     *
+     */
+    class BAD_API ofdm_symbols_selector : virtual public gr::block
     {
-    private:
-      int d_ivlen;
-      int d_iitems;
-      int d_ovlen;
-      int d_oitems;
-      std::string d_tag_name;
+     public:
+      typedef boost::shared_ptr<ofdm_symbols_selector> sptr;
 
-    public:
-      adapter_impl(int ivlen, int iitems, int ovlen, int oitems, const char *tag_name);
-      ~adapter_impl();
-
-      void forecast(int noutput_items, gr_vector_int &ninput_items_required);
-
-      int general_work(int noutput_items,
-                       gr_vector_int &ninput_items,
-                       gr_vector_const_void_star &input_items,
-                       gr_vector_void_star &output_items);
-
+      /*!
+       * \brief Return a shared_ptr to a new instance of bad::ofdm_symbols_selector.
+       *
+       * To avoid accidental use of raw pointers, bad::ofdm_symbols_selector's
+       * constructor is in a private implementation
+       * class. bad::ofdm_symbols_selector::make is the public interface for
+       * creating new instances.
+       */
+      static sptr make(int first, int count);
     };
 
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_ADAPTER_IMPL_H */
+#endif /* INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_H */
 

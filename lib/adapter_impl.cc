@@ -30,26 +30,29 @@ namespace gr {
 
     template<typename ITYPE0, typename OTYPE0>
     typename adapter<ITYPE0, OTYPE0>::sptr
-             adapter<ITYPE0, OTYPE0>::make(int ivlen, int iitems, int ovlen, int oitems)
+             adapter<ITYPE0, OTYPE0>::make(int ivlen, int iitems, int ovlen, int oitems, const char *tag_name)
     {
       return gnuradio::get_initial_sptr
-        (new adapter_impl<ITYPE0, OTYPE0>(ivlen, iitems, ovlen, oitems));
+        (new adapter_impl<ITYPE0, OTYPE0>(ivlen, iitems, ovlen, oitems, tag_name));
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    adapter_impl<ITYPE0, OTYPE0>::adapter_impl(int ivlen, int iitems, int ovlen, int oitems)
+    adapter_impl<ITYPE0, OTYPE0>::adapter_impl(int ivlen, int iitems, int ovlen, int oitems, const char *tag_name)
       : gr::block("adapter",
                   gr::io_signature::make(1, 1, sizeof(ITYPE0) * ivlen),
                   gr::io_signature::make(1, 1, sizeof(OTYPE0) * ovlen)),
         d_ivlen(ivlen),
         d_iitems(iitems),
         d_ovlen(ovlen),
-        d_oitems(oitems)
+        d_oitems(oitems),
+        d_tag_name(tag_name ? std::string(tag_name) : std::string())
     {
       assert(ivlen * iitems >= ovlen * oitems);
       this->set_relative_rate(ovlen * oitems, ivlen * iitems);
       this->set_output_multiple(oitems);
-      this->set_tag_propagation_policy(gr::block::TPP_DONT);
+      this->set_tag_propagation_policy(gr::block::TPP_CUSTOM);
+
+      printf("%s: tag_name: '%s'\n", __func__, d_tag_name.c_str());
     }
 
     template<typename ITYPE0, typename OTYPE0>
@@ -86,6 +89,9 @@ namespace gr {
         if (ninput_items[0] < nconsumed + d_iitems)
           break;
 
+        if (!d_tag_name.empty())
+          for (int n = nproduced; n < nproduced + d_oitems; ++n)
+            this->add_item_tag(0, this->nitems_written(0) + n, pmt::mp(d_tag_name), pmt::mp(n), this->alias_pmt());
         memcpy(optr0, iptr0, sizeof(OTYPE0) * d_ovlen * d_oitems);
 
         iptr0 += d_ivlen * d_iitems;

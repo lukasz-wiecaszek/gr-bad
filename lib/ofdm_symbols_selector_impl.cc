@@ -23,36 +23,38 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "select_symbols_impl.h"
+#include "ofdm_symbols_selector_impl.h"
 #include "dab_parameters.h"
 
 namespace gr {
   namespace bad {
 
-    select_symbols::sptr
-    select_symbols::make()
+    ofdm_symbols_selector::sptr
+    ofdm_symbols_selector::make(int first, int count)
     {
       return gnuradio::get_initial_sptr
-        (new select_symbols_impl<float, float>());
+        (new ofdm_symbols_selector_impl<float, float>(first, count));
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    select_symbols_impl<ITYPE0, OTYPE0>::select_symbols_impl()
-      : gr::block("select_symbols",
+    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::ofdm_symbols_selector_impl(int first, int count)
+      : gr::block("ofdm_symbols_selector",
                   gr::io_signature::make(1, 1, sizeof(ITYPE0) * IVLEN0),
-                  gr::io_signature::make(1, 1, sizeof(OTYPE0) * OVLEN0))
+                  gr::io_signature::make(1, 1, sizeof(OTYPE0) * OVLEN0)),
+        d_first(first),
+        d_count(count)
     {
       set_tag_propagation_policy(TPP_DONT);
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    select_symbols_impl<ITYPE0, OTYPE0>::~select_symbols_impl()
+    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::~ofdm_symbols_selector_impl()
     {
     }
 
     template<typename ITYPE0, typename OTYPE0>
     void
-    select_symbols_impl<ITYPE0, OTYPE0>::forecast(int noutput_items, gr_vector_int &ninput_items_required)
+    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::forecast(int noutput_items, gr_vector_int &ninput_items_required)
     {
       for (auto&& element : ninput_items_required)
         element = noutput_items;
@@ -60,7 +62,7 @@ namespace gr {
 
     template<typename ITYPE0, typename OTYPE0>
     int
-    select_symbols_impl<ITYPE0, OTYPE0>::general_work(int noutput_items,
+    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::general_work(int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
@@ -76,10 +78,12 @@ namespace gr {
       for (auto&& element : tags) {
         if (nproduced >= noutput_items)
           break;
+        if (nconsumed >= ninput_items[0])
+          break;
 
         int l = pmt::to_long(element.value);
 
-        if (l == 1 || l == 2 || l == 3) {
+        if ((l >= d_first) && (l < (d_first + d_count))) {
           memcpy(optr0, iptr0, sizeof(OTYPE0) * OVLEN0);
           optr0 += OVLEN0;
           nproduced++;

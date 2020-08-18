@@ -18,28 +18,28 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_ADAPTER_IMPL_H
-#define INCLUDED_BAD_ADAPTER_IMPL_H
+#ifndef INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_IMPL_H
+#define INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_IMPL_H
 
-#include <bad/adapter.h>
-#include <string>
+#include <bad/ofdm_symbols_selector.h>
+#include "dab_parameters.h"
+
+#define IVLEN0 OFDM_SYMBOL_BITS
+#define OVLEN0 OFDM_SYMBOL_BITS
 
 namespace gr {
   namespace bad {
 
     template<typename ITYPE0, typename OTYPE0>
-    class adapter_impl : public adapter<ITYPE0, OTYPE0>
+    class ofdm_symbols_selector_impl : public ofdm_symbols_selector
     {
     private:
-      int d_ivlen;
-      int d_iitems;
-      int d_ovlen;
-      int d_oitems;
-      std::string d_tag_name;
+      int d_first;
+      int d_count;
 
     public:
-      adapter_impl(int ivlen, int iitems, int ovlen, int oitems, const char *tag_name);
-      ~adapter_impl();
+      ofdm_symbols_selector_impl(int first, int count);
+      ~ofdm_symbols_selector_impl();
 
       void forecast(int noutput_items, gr_vector_int &ninput_items_required);
 
@@ -53,5 +53,5 @@ namespace gr {
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_ADAPTER_IMPL_H */
+#endif /* INCLUDED_BAD_OFDM_SYMBOLS_SELECTOR_IMPL_H */
 

@@ -37,7 +37,9 @@ list(APPEND bad_sources
     depuncturing_impl.cc
     convolutional_decoder_impl.cc
     energy_dispersal_descrambler_impl.cc
-    adapter_impl.cc )
+    adapter_impl.cc
+    ofdm_symbols_selector_impl.cc
+    cus_selector_impl.cc )
 
 set(bad_sources "${bad_sources}" PARENT_SCOPE)
 if(NOT bad_sources)

@@ -75,6 +75,9 @@ namespace gr {
   // number of FIC convolutional codewords
   constexpr int  FIC_CONVOLUTIONAL_CODEWORDS = 4;
 
+  // size of capacity unit
+  constexpr int  CU_SIZE = 64;
+
   constexpr const char* TAG_NS = "dab_sync";
 
   constexpr const char* TAG_SYMBOL = "symbol";

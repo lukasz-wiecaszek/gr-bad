@@ -76,23 +76,23 @@ namespace gr {
     {
       gr::trellis::fsm fsm{1, 4, polynomials};
 
-      printf("fsm: input symbols: %u, output symbols: %u, states: %u\n", fsm.I(), fsm.O(), fsm.S()); 
+      printf("fsm: input symbols: %u, output symbols: %u, states: %u\n", fsm.I(), fsm.O(), fsm.S());
 
       std::vector<float> table(observations.size());
-      std::transform(observations.begin(), observations.end(), table.begin(), 
+      std::transform(observations.begin(), observations.end(), table.begin(),
          [](int x){return (1 - 2 * x) / std::sqrt(2);});
 
       gr::bad::depuncturing::sptr depuncturing(
         gr::bad::depuncturing::make());
-      
+
       gr::blocks::vector_to_stream::sptr vector_to_stream(
         gr::blocks::vector_to_stream::make(sizeof(ITYPE0), FIC_CONVOLUTIONAL_CODEWORD_LENGTH));
-      
+
       gr::trellis::viterbi_combined_fb::sptr viterbi_combined(
         gr::trellis::viterbi_combined_fb::make(fsm, 768 + 6, 0, 0, 4, table, gr::digital::TRELLIS_EUCLIDEAN));
 
       gr::bad::adapter_bb::sptr adapter(
-        gr::bad::adapter_bb::make(1, (768 + 6) * 4, 768, 4));
+        gr::bad::adapter_bb::make(1, (768 + 6) * 4, 768, 4, NULL));
 
 
       connect(self(),               0, depuncturing,         0);
