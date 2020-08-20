@@ -39,5 +39,6 @@ install(FILES
     energy_dispersal_descrambler.h
     adapter.h
     ofdm_symbols_selector.h
-    cus_selector.h DESTINATION include/bad
+    cus_selector.h
+    time_deinterleaver.h DESTINATION include/bad
 )

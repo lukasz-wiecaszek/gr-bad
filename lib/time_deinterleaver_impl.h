@@ -18,27 +18,25 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H
-#define INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H
+#ifndef INCLUDED_BAD_TIME_DEINTERLEAVER_IMPL_H
+#define INCLUDED_BAD_TIME_DEINTERLEAVER_IMPL_H
 
-#include <bad/energy_dispersal_descrambler.h>
-#include "prbs.h"
-
+#include <bad/time_deinterleaver.h>
 #include <type_traits>
 
 namespace gr {
   namespace bad {
 
     template<typename ITYPE0, typename OTYPE0>
-    class energy_dispersal_descrambler_impl : public energy_dispersal_descrambler
+    class time_deinterleaver_impl : public time_deinterleaver
     {
       static_assert(std::is_same<ITYPE0, OTYPE0>::value, "Input and output types needs to be the same");
     private:
-      prbs<OTYPE0> d_prbs;
+      int d_vlen;
 
     public:
-      energy_dispersal_descrambler_impl(int vlen);
-      ~energy_dispersal_descrambler_impl();
+      time_deinterleaver_impl(int vlen);
+      ~time_deinterleaver_impl();
 
       int work(
               int noutput_items,
@@ -50,5 +48,5 @@ namespace gr {
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H */
+#endif /* INCLUDED_BAD_TIME_DEINTERLEAVER_IMPL_H */
 

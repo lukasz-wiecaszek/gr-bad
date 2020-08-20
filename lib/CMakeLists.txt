@@ -39,7 +39,8 @@ list(APPEND bad_sources
     energy_dispersal_descrambler_impl.cc
     adapter_impl.cc
     ofdm_symbols_selector_impl.cc
-    cus_selector_impl.cc )
+    cus_selector_impl.cc
+    time_deinterleaver_impl.cc )
 
 set(bad_sources "${bad_sources}" PARENT_SCOPE)
 if(NOT bad_sources)

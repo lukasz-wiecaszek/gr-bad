@@ -18,37 +18,38 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H
-#define INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H
+#ifndef INCLUDED_BAD_TIME_DEINTERLEAVER_H
+#define INCLUDED_BAD_TIME_DEINTERLEAVER_H
 
-#include <bad/energy_dispersal_descrambler.h>
-#include "prbs.h"
-
-#include <type_traits>
+#include <bad/api.h>
+#include <gnuradio/sync_block.h>
 
 namespace gr {
   namespace bad {
 
-    template<typename ITYPE0, typename OTYPE0>
-    class energy_dispersal_descrambler_impl : public energy_dispersal_descrambler
+    /*!
+     * \brief <+description of block+>
+     * \ingroup bad
+     *
+     */
+    class BAD_API time_deinterleaver : virtual public gr::sync_block
     {
-      static_assert(std::is_same<ITYPE0, OTYPE0>::value, "Input and output types needs to be the same");
-    private:
-      prbs<OTYPE0> d_prbs;
+     public:
+      typedef boost::shared_ptr<time_deinterleaver> sptr;
 
-    public:
-      energy_dispersal_descrambler_impl(int vlen);
-      ~energy_dispersal_descrambler_impl();
-
-      int work(
-              int noutput_items,
-              gr_vector_const_void_star &input_items,
-              gr_vector_void_star &output_items
-      );
+      /*!
+       * \brief Return a shared_ptr to a new instance of bad::time_deinterleaver.
+       *
+       * To avoid accidental use of raw pointers, bad::time_deinterleaver's
+       * constructor is in a private implementation
+       * class. bad::time_deinterleaver::make is the public interface for
+       * creating new instances.
+       */
+      static sptr make(int vlen);
     };
 
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_ENERGY_DISPERSAL_DESCRAMBLER_IMPL_H */
+#endif /* INCLUDED_BAD_TIME_DEINTERLEAVER_H */
 

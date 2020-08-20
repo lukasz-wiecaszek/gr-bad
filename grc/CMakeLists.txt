@@ -34,5 +34,6 @@ install(FILES
     bad_energy_dispersal_descrambler.block.yml
     bad_adapter.block.yml
     bad_ofdm_symbols_selector.block.yml
-    bad_cus_selector.block.yml DESTINATION share/gnuradio/grc/blocks
+    bad_cus_selector.block.yml
+    bad_time_deinterleaver.block.yml DESTINATION share/gnuradio/grc/blocks
 )
