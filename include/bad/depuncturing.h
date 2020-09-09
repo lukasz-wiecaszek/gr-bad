@@ -22,6 +22,7 @@
 #define INCLUDED_BAD_DEPUNCTURING_H
 
 #include <bad/api.h>
+#include <bad/protection_type.h>
 #include <gnuradio/sync_block.h>
 
 namespace gr {
@@ -45,7 +46,10 @@ namespace gr {
        * class. bad::depuncturing::make is the public interface for
        * creating new instances.
        */
-      static sptr make();
+      static sptr make(protection_type_e type, int index, int n);
+
+      static int ivlen(protection_type_e type, int index, int n);
+      static int ovlen(protection_type_e type, int index, int n);
     };
 
   } // namespace bad

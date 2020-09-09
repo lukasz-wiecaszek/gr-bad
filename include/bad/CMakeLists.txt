@@ -34,11 +34,14 @@ install(FILES
     ns_moving_sum.h
     select_symbols.h
     block_departitioner.h
+    protection_type.h
     depuncturing.h
     convolutional_decoder.h
     energy_dispersal_descrambler.h
     adapter.h
     ofdm_symbols_selector.h
     cus_selector.h
-    time_deinterleaver.h DESTINATION include/bad
+    time_deinterleaver.h
+    DESTINATION
+      include/bad
 )

@@ -30,7 +30,9 @@ install(FILES
     bad_select_symbols.block.yml
     bad_block_departitioner.block.yml
     bad_depuncturing.block.yml
-    bad_convolutional_decoder.block.yml
+    bad_fic_convolutional_decoder.block.yml
+    bad_msc_uep_convolutional_decoder.block.yml
+    bad_msc_eep_convolutional_decoder.block.yml
     bad_energy_dispersal_descrambler.block.yml
     bad_adapter.block.yml
     bad_ofdm_symbols_selector.block.yml

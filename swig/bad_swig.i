@@ -8,6 +8,7 @@
 %include "bad_swig_doc.i"
 
 %{
+#include "bad/protection_type.h"
 #include "bad/ns_peak_detector.h"
 #include "bad/ns_detector.h"
 #include "bad/ofdm_sampler.h"
@@ -27,6 +28,8 @@
 #include "bad/cus_selector.h"
 #include "bad/time_deinterleaver.h"
 %}
+
+%include "bad/protection_type.h"
 
 %include "bad/ns_peak_detector.h"
 GR_SWIG_BLOCK_MAGIC2(bad, ns_peak_detector);
@@ -73,13 +76,15 @@ GR_SWIG_BLOCK_MAGIC2(bad, energy_dispersal_descrambler);
 %include "bad/ofdm_symbols_selector.h"
 GR_SWIG_BLOCK_MAGIC2(bad, ofdm_symbols_selector);
 
+%include "bad/cus_selector.h"
+GR_SWIG_BLOCK_MAGIC2(bad, cus_selector);
+
+%include "bad/time_deinterleaver.h"
+GR_SWIG_BLOCK_MAGIC2(bad, time_deinterleaver);
+
 %include "bad/adapter.h"
 GR_SWIG_BLOCK_MAGIC2_TMPL(bad, adapter_bb, adapter<std::uint8_t, std::uint8_t>);
 GR_SWIG_BLOCK_MAGIC2_TMPL(bad, adapter_ss, adapter<std::uint16_t, std::uint16_t>);
 GR_SWIG_BLOCK_MAGIC2_TMPL(bad, adapter_ii, adapter<std::uint32_t, std::uint32_t>);
 GR_SWIG_BLOCK_MAGIC2_TMPL(bad, adapter_ff, adapter<float, float>);
 GR_SWIG_BLOCK_MAGIC2_TMPL(bad, adapter_cc, adapter<gr_complex, gr_complex>);
-%include "bad/cus_selector.h"
-GR_SWIG_BLOCK_MAGIC2(bad, cus_selector);
-%include "bad/time_deinterleaver.h"
-GR_SWIG_BLOCK_MAGIC2(bad, time_deinterleaver);

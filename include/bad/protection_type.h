@@ -18,29 +18,21 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_CONVOLUTIONAL_DECODER_IMPL_H
-#define INCLUDED_BAD_CONVOLUTIONAL_DECODER_IMPL_H
-
-#include <bad/convolutional_decoder.h>
-#include "dab_parameters.h"
+#ifndef INCLUDED_BAD_PROTECTION_TYPE_H
+#define INCLUDED_BAD_PROTECTION_TYPE_H
 
 namespace gr {
   namespace bad {
 
-    template<typename ITYPE0, typename OTYPE0>
-    class convolutional_decoder_impl : public convolutional_decoder
-    {
-    private:
-      int d_I;
-
-    public:
-      convolutional_decoder_impl(protection_type_e type, int index, int n);
-      ~convolutional_decoder_impl();
-
-    };
+    typedef enum {
+      PROTECTION_TYPE_FIC,
+      PROTECTION_TYPE_UEP,
+      PROTECTION_TYPE_EEP_A,
+      PROTECTION_TYPE_EEP_B
+    } protection_type_e;
 
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_CONVOLUTIONAL_DECODER_IMPL_H */
+#endif /* INCLUDED_BAD_PROTECTION_TYPE_H */
 

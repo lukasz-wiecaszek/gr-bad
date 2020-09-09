@@ -22,10 +22,7 @@
 #define INCLUDED_BAD_DEPUNCTURING_IMPL_H
 
 #include <bad/depuncturing.h>
-#include "dab_parameters.h"
-
-#define IVLEN0 FIC_PUNCTURED_CONVOLUTIONAL_CODEWORD_LENGTH
-#define OVLEN0 FIC_CONVOLUTIONAL_CODEWORD_LENGTH
+#include <vector>
 
 namespace gr {
   namespace bad {
@@ -34,10 +31,10 @@ namespace gr {
     class depuncturing_impl : public depuncturing
     {
     private:
-      std::array<int, FIC_CONVOLUTIONAL_CODEWORD_LENGTH> d_fic_puncturing_vector;
+      std::vector<int> d_puncturing_vector;
 
     public:
-      depuncturing_impl();
+      depuncturing_impl(protection_type_e type, int index, int n);
       ~depuncturing_impl();
 
       int work(
