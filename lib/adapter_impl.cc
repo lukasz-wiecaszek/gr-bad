@@ -90,8 +90,9 @@ namespace gr {
           break;
 
         if (!d_tag_name.empty())
-          for (int n = nproduced; n < nproduced + d_oitems; ++n)
-            this->add_item_tag(0, this->nitems_written(0) + n, pmt::mp(d_tag_name), pmt::mp(n), this->alias_pmt());
+          for (int n = 0; n < d_oitems; ++n)
+            this->add_item_tag(0, this->nitems_written(0) + nproduced + n, pmt::mp(d_tag_name), pmt::mp(n), this->alias_pmt());
+
         memcpy(optr0, iptr0, sizeof(OTYPE0) * d_ovlen * d_oitems);
 
         iptr0 += d_ivlen * d_iitems;

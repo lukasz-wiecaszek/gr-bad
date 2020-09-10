@@ -139,7 +139,7 @@ namespace gr {
         gr::trellis::viterbi_combined_fb::make(fsm, d_I + 6, 0, 0, 4, table, gr::digital::TRELLIS_EUCLIDEAN));
 
       gr::bad::adapter_bb::sptr adapter(
-        gr::bad::adapter_bb::make(1, (d_I + 6) * 4, d_I, 4, NULL));
+        gr::bad::adapter_bb::make(1, d_I + 6, d_I, 1, NULL));
 
 
       connect(self(),               0, depuncturing,         0);
