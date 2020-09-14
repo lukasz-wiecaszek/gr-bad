@@ -40,7 +40,8 @@ list(APPEND bad_sources
     adapter_impl.cc
     ofdm_symbols_selector_impl.cc
     cus_selector_impl.cc
-    time_deinterleaver_impl.cc )
+    time_deinterleaver_impl.cc
+    fifo_sink_impl.cc )
 
 set(bad_sources "${bad_sources}" PARENT_SCOPE)
 if(NOT bad_sources)

@@ -42,6 +42,6 @@ install(FILES
     ofdm_symbols_selector.h
     cus_selector.h
     time_deinterleaver.h
-    DESTINATION
+    fifo_sink.h DESTINATION
       include/bad
 )
