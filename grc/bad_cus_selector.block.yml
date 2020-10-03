@@ -13,7 +13,7 @@ templates:
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 parameters:
 - id: first
-  label: first cu
+  label: First cu
   dtype: int
 
 - id: count

@@ -69,7 +69,7 @@ namespace gr {
 
       for (int i = 0; i < noutput_items; ++i)
         for (int ir = 0; ir < d_vlen; ++ir) {
-          int r = r_prime_to_r_length - r_prime_to_r[ir % r_prime_to_r_length];
+          int r = r_prime_to_r[ir % r_prime_to_r_length];
           optr0[ir] = iptr0[d_vlen * (i + r) + ir];
         }
 

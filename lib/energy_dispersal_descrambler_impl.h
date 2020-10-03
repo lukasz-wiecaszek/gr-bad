@@ -32,7 +32,7 @@ namespace gr {
     template<typename ITYPE0, typename OTYPE0>
     class energy_dispersal_descrambler_impl : public energy_dispersal_descrambler
     {
-      static_assert(std::is_same<ITYPE0, OTYPE0>::value, "Input and output types needs to be the same");
+      static_assert(std::is_same<ITYPE0, OTYPE0>::value, "Input and output types need to be the same");
     private:
       prbs<OTYPE0> d_prbs;
 

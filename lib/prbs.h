@@ -44,8 +44,6 @@ namespace gr {
         // Initial state: 111111111
         d_FSR.fill(1);
 
-        //PRBS = std::make_unique<T[]>(length);
-
         // Polynomial: X^9 + X^5 + 1
         for (int i = 0; i < length; ++i) {
           T x = d_FSR[8] ^ d_FSR[4];

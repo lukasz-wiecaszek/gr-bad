@@ -10,8 +10,9 @@ First of all you will need all the required dependencies.
 Most likely you have them already installed.
 I am assuming that you already have gnuradio installed. If not, please do so first.
 
-[Installing GR from Binaries](https://wiki.gnuradio.org/index.php/InstallingGR#From_Binaries)
-[Installing GR from Source](https://wiki.gnuradio.org/index.php/InstallingGR#From_Source).
+You can go to [Installing GR from Binaries](https://wiki.gnuradio.org/index.php/InstallingGR#From_Binaries)
+or [Installing GR from Source](https://wiki.gnuradio.org/index.php/InstallingGR#From_Source)
+depending on your needs.
 
 By the way, I am using gnuradio 3.8.
 
@@ -40,5 +41,22 @@ or
 ```
   $ mkfifo msc.fifo
 ```
-
-
+The idea now is to use GStreamer to play for us our selected radio station.
+When we have subchannel coded by mpeg1 layer 2 we can use following pipeline:
+```
+gst-launch-1.0 filesrc location=msc.fifo ! mpegaudioparse ! mpg123audiodec ! autoaudiosink
+```
+But what about DAB+ subchannels (these are HE AAC coded with additional DAB Plus Audio Super Frames wrapping).
+I would give a try one of the following pipelines:
+```
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! avdec_aac ! autoaudiosink
+```
+or
+```
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! faad ! autoaudiosink
+```
+or even
+```
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! fdkaacdec ! autoaudiosink
+```
+depending which aac decoder is present on your system (or depending on your flavours).
