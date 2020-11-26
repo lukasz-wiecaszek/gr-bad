@@ -24,22 +24,22 @@
 
 #include <gnuradio/io_signature.h>
 #include <gnuradio/math.h>
-#include "ofdm_fine_frequency_correction_impl.h"
+#include "ofdm_fine_frequency_estimation_impl.h"
 #include "tag_positions.h"
 
 namespace gr {
   namespace bad {
 
-    ofdm_fine_frequency_correction::sptr
-    ofdm_fine_frequency_correction::make(float alpha)
+    ofdm_fine_frequency_estimation::sptr
+    ofdm_fine_frequency_estimation::make(float alpha)
     {
       return gnuradio::get_initial_sptr
-        (new ofdm_fine_frequency_correction_impl<gr_complex, float>(alpha));
+        (new ofdm_fine_frequency_estimation_impl<gr_complex, float>(alpha));
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::ofdm_fine_frequency_correction_impl(float alpha)
-      : gr::sync_block("ofdm_fine_frequency_correction",
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::ofdm_fine_frequency_estimation_impl(float alpha)
+      : gr::sync_block("ofdm_fine_frequency_estimation",
                        gr::io_signature::make(1, 1, sizeof(ITYPE0) * IVLEN0),
                        gr::io_signature::make(1, 1, sizeof(OTYPE0) * OVLEN0)),
         d_state(state::NULL_SYMBOL),
@@ -50,16 +50,19 @@ namespace gr {
     {
       set_output_multiple((2 * TNULL) + 1);
       set_tag_propagation_policy(TPP_DONT);
+
+      printf("constructor\n");
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::~ofdm_fine_frequency_correction_impl()
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::~ofdm_fine_frequency_estimation_impl()
     {
+      printf("destructor\n");
     }
 
     template<typename ITYPE0, typename OTYPE0>
     float
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::estimate_atan(const ITYPE0* iptr)
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::estimate_atan(const ITYPE0* iptr)
     {
       gr_complex sum = 0;
 
@@ -73,7 +76,7 @@ namespace gr {
 
     template<typename ITYPE0, typename OTYPE0>
     bool
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::state_handler_null_symbol(tag_positions& positions, int nout, OTYPE0* optr)
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::state_handler_null_symbol(tag_positions& positions, int nout, OTYPE0* optr)
     {
       d_symbol = 0;
 
@@ -98,7 +101,7 @@ namespace gr {
 
     template<typename ITYPE0, typename OTYPE0>
     bool
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::state_handler_regular_symbol(int nout, const ITYPE0* iptr, OTYPE0* optr)
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::state_handler_regular_symbol(int nout, const ITYPE0* iptr, OTYPE0* optr)
     {
       if (d_pos + TS > nout)
         return false;
@@ -123,7 +126,7 @@ namespace gr {
 
     template<typename ITYPE0, typename OTYPE0>
     int
-    ofdm_fine_frequency_correction_impl<ITYPE0, OTYPE0>::work(int noutput_items,
+    ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::work(int noutput_items,
         gr_vector_const_void_star &input_items,
         gr_vector_void_star &output_items)
     {

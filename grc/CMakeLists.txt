@@ -25,7 +25,7 @@ install(FILES
     bad_ofdm_differential_demodulator.block.yml
     bad_frequency_deinterleaver.block.yml
     bad_qpsk_symbol_demapper.block.yml
-    bad_ofdm_fine_frequency_correction.block.yml
+    bad_ofdm_fine_frequency_estimation.block.yml
     bad_ns_moving_sum.block.yml
     bad_select_symbols.block.yml
     bad_block_departitioner.block.yml

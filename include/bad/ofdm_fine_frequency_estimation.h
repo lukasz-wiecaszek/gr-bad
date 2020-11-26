@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_H
-#define INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_H
+#ifndef INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_H
+#define INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_H
 
 #include <bad/api.h>
 #include <gnuradio/sync_block.h>
@@ -32,17 +32,17 @@ namespace gr {
      * \ingroup bad
      *
      */
-    class BAD_API ofdm_fine_frequency_correction : virtual public gr::sync_block
+    class BAD_API ofdm_fine_frequency_estimation : virtual public gr::sync_block
     {
      public:
-      typedef boost::shared_ptr<ofdm_fine_frequency_correction> sptr;
+      typedef boost::shared_ptr<ofdm_fine_frequency_estimation> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of bad::ofdm_fine_frequency_correction.
+       * \brief Return a shared_ptr to a new instance of bad::ofdm_fine_frequency_estimation.
        *
-       * To avoid accidental use of raw pointers, bad::ofdm_fine_frequency_correction's
+       * To avoid accidental use of raw pointers, bad::ofdm_fine_frequency_estimation's
        * constructor is in a private implementation
-       * class. bad::ofdm_fine_frequency_correction::make is the public interface for
+       * class. bad::ofdm_fine_frequency_estimation::make is the public interface for
        * creating new instances.
        */
       static sptr make(float alpha = 0.1);
@@ -51,5 +51,5 @@ namespace gr {
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_H */
+#endif /* INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_H */
 

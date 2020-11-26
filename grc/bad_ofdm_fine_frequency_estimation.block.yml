@@ -1,10 +1,10 @@
-id: bad_ofdm_fine_frequency_correction
-label: ofdm_fine_frequency_correction
+id: bad_ofdm_fine_frequency_estimation
+label: ofdm_fine_frequency_estimation
 category: '[bad]'
 
 templates:
   imports: import bad
-  make: bad.ofdm_fine_frequency_correction(${alpha})
+  make: bad.ofdm_fine_frequency_estimation(${alpha})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:

@@ -44,19 +44,19 @@ or
 The idea now is to use GStreamer to play for us our selected radio station.
 When we have subchannel coded by mpeg1 layer 2 we can use following pipeline:
 ```
-gst-launch-1.0 filesrc location=msc.fifo ! mpegaudioparse ! mpg123audiodec ! autoaudiosink
+gst-launch-1.0 filesrc location=msc.fifo ! mpegaudioparse ! mpg123audiodec ! audioresample ! audioconvert ! autoaudiosink
 ```
 But what about DAB+ subchannels (these are HE AAC coded with additional DAB Plus Audio Super Frames wrapping).
 I would give a try one of the following pipelines:
 ```
-gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! avdec_aac ! autoaudiosink
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! avdec_aac ! audioresample ! audioconvert ! autoaudiosink
 ```
 or
 ```
-gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! faad ! autoaudiosink
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! faad ! audioresample ! audioconvert ! autoaudiosink
 ```
 or even
 ```
-gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! fdkaacdec ! autoaudiosink
+gst-launch-1.0 filesrc location=msc.fifo ! dabplusparse ! fdkaacdec ! audioresample ! audioconvert ! autoaudiosink
 ```
 depending which aac decoder is present on your system (or depending on your flavours).

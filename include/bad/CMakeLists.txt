@@ -30,7 +30,7 @@ install(FILES
     ofdm_differential_demodulator.h
     frequency_deinterleaver.h
     qpsk_symbol_demapper.h
-    ofdm_fine_frequency_correction.h
+    ofdm_fine_frequency_estimation.h
     ns_moving_sum.h
     select_symbols.h
     block_departitioner.h

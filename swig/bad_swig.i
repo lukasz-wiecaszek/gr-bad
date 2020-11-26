@@ -16,7 +16,7 @@
 #include "bad/ofdm_differential_demodulator.h"
 #include "bad/frequency_deinterleaver.h"
 #include "bad/qpsk_symbol_demapper.h"
-#include "bad/ofdm_fine_frequency_correction.h"
+#include "bad/ofdm_fine_frequency_estimation.h"
 #include "bad/ns_moving_sum.h"
 #include "bad/select_symbols.h"
 #include "bad/block_departitioner.h"
@@ -60,8 +60,8 @@ GR_SWIG_BLOCK_MAGIC2(bad, frequency_deinterleaver);
 %include "bad/qpsk_symbol_demapper.h"
 GR_SWIG_BLOCK_MAGIC2(bad, qpsk_symbol_demapper);
 
-%include "bad/ofdm_fine_frequency_correction.h"
-GR_SWIG_BLOCK_MAGIC2(bad, ofdm_fine_frequency_correction);
+%include "bad/ofdm_fine_frequency_estimation.h"
+GR_SWIG_BLOCK_MAGIC2(bad, ofdm_fine_frequency_estimation);
 
 %include "bad/ns_moving_sum.h"
 GR_SWIG_BLOCK_MAGIC2(bad, ns_moving_sum);

@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_IMPL_H
-#define INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_IMPL_H
+#ifndef INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_IMPL_H
+#define INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_IMPL_H
 
-#include <bad/ofdm_fine_frequency_correction.h>
+#include <bad/ofdm_fine_frequency_estimation.h>
 #include "dab_parameters.h"
 #include "tag_positions.h"
 
@@ -32,7 +32,7 @@ namespace gr {
   namespace bad {
 
     template<typename ITYPE0, typename OTYPE0>
-    class ofdm_fine_frequency_correction_impl : public ofdm_fine_frequency_correction
+    class ofdm_fine_frequency_estimation_impl : public ofdm_fine_frequency_estimation
     {
     private:
       enum class state {
@@ -52,8 +52,8 @@ namespace gr {
       bool state_handler_regular_symbol(int nout, const ITYPE0* iptr, OTYPE0* optr);
 
     public:
-      ofdm_fine_frequency_correction_impl(float alpha);
-      ~ofdm_fine_frequency_correction_impl();
+      ofdm_fine_frequency_estimation_impl(float alpha);
+      ~ofdm_fine_frequency_estimation_impl();
 
       int work(
               int noutput_items,
@@ -65,5 +65,5 @@ namespace gr {
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_OFDM_FINE_FREQUENCY_CORRECTION_IMPL_H */
+#endif /* INCLUDED_BAD_OFDM_FINE_FREQUENCY_ESTIMATION_IMPL_H */
 

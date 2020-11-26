@@ -30,7 +30,7 @@ list(APPEND bad_sources
     ofdm_differential_demodulator_impl.cc
     frequency_deinterleaver_impl.cc
     qpsk_symbol_demapper_impl.cc
-    ofdm_fine_frequency_correction_impl.cc
+    ofdm_fine_frequency_estimation_impl.cc
     ns_moving_sum_impl.cc
     select_symbols_impl.cc
     block_departitioner_impl.cc
