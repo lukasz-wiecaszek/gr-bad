@@ -38,5 +38,6 @@ install(FILES
     bad_ofdm_symbols_selector.block.yml
     bad_cus_selector.block.yml
     bad_time_deinterleaver.block.yml
-    bad_fifo_sink.block.yml DESTINATION share/gnuradio/grc/blocks
+    bad_fifo_sink.block.yml
+    bad_ofdm_fine_frequency_correction.block.yml DESTINATION share/gnuradio/grc/blocks
 )

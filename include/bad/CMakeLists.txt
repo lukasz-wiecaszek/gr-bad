@@ -42,6 +42,7 @@ install(FILES
     ofdm_symbols_selector.h
     cus_selector.h
     time_deinterleaver.h
-    fifo_sink.h DESTINATION
+    fifo_sink.h
+    ofdm_fine_frequency_correction.h DESTINATION
       include/bad
 )

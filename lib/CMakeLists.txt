@@ -41,7 +41,8 @@ list(APPEND bad_sources
     ofdm_symbols_selector_impl.cc
     cus_selector_impl.cc
     time_deinterleaver_impl.cc
-    fifo_sink_impl.cc )
+    fifo_sink_impl.cc
+    ofdm_fine_frequency_correction_impl.cc )
 
 set(bad_sources "${bad_sources}" PARENT_SCOPE)
 if(NOT bad_sources)
@@ -51,7 +52,7 @@ endif(NOT bad_sources)
 
 add_library(gnuradio-bad SHARED ${bad_sources})
 target_link_libraries(gnuradio-bad
-    PUBLIC gnuradio-runtime gnuradio-blocks gnuradio-trellis gnuradio-digital)
+    PUBLIC gnuradio-runtime gnuradio-blocks gnuradio-trellis gnuradio-digital gnuradio-analog)
 target_include_directories(gnuradio-bad
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>
