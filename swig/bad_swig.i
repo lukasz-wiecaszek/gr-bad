@@ -29,6 +29,7 @@
 #include "bad/time_deinterleaver.h"
 #include "bad/fifo_sink.h"
 #include "bad/ofdm_fine_frequency_correction.h"
+#include "bad/fic_decoder.h"
 %}
 
 %include "bad/protection_type.h"
@@ -95,3 +96,5 @@ GR_SWIG_BLOCK_MAGIC2(bad, time_deinterleaver);
 GR_SWIG_BLOCK_MAGIC2(bad, fifo_sink);
 %include "bad/ofdm_fine_frequency_correction.h"
 GR_SWIG_BLOCK_MAGIC2(bad, ofdm_fine_frequency_correction);
+%include "bad/fic_decoder.h"
+GR_SWIG_BLOCK_MAGIC2(bad, fic_decoder);

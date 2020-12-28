@@ -117,7 +117,7 @@ namespace gr {
       : gr::hier_block2("convolutional_decoder",
                         gr::io_signature::make(1, 1, sizeof(ITYPE0) * ivlen(type, index, n)),
                         gr::io_signature::make(1, 1, sizeof(OTYPE0) * ovlen(type, index, n))),
-        d_I(ovlen(type, index, n))
+        d_I{ovlen(type, index, n)}
     {
       gr::trellis::fsm fsm{1, 4, polynomials};
 
@@ -133,14 +133,13 @@ namespace gr {
         gr::bad::depuncturing::make(type, index, n));
 
       gr::blocks::vector_to_stream::sptr vector_to_stream(
-        gr::blocks::vector_to_stream::make(sizeof(ITYPE0), sizeof(OTYPE0) * (d_I + 6) * 4));
+        gr::blocks::vector_to_stream::make(sizeof(ITYPE0), (d_I + 6) * 4));
 
       gr::trellis::viterbi_combined_fb::sptr viterbi_combined(
         gr::trellis::viterbi_combined_fb::make(fsm, d_I + 6, 0, 0, 4, table, gr::digital::TRELLIS_EUCLIDEAN));
 
       gr::bad::adapter_bb::sptr adapter(
-        gr::bad::adapter_bb::make(1, d_I + 6, d_I, 1, NULL));
-
+        gr::bad::adapter_bb::make(sizeof(OTYPE0), d_I + 6, d_I, sizeof(OTYPE0), NULL));
 
       connect(self(),               0, depuncturing,         0);
       connect(depuncturing,         0, vector_to_stream,     0);

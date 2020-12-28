@@ -43,6 +43,7 @@ install(FILES
     cus_selector.h
     time_deinterleaver.h
     fifo_sink.h
-    ofdm_fine_frequency_correction.h DESTINATION
+    ofdm_fine_frequency_correction.h
+    fic_decoder.h DESTINATION
       include/bad
 )
