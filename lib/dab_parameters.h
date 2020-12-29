@@ -78,9 +78,14 @@ namespace gr {
   // size of capacity unit
   constexpr int  CU_SIZE = 64;
 
+  // number of capacity units in one CIF
+  constexpr int CUS_PER_CIF = 864;
+
   constexpr const char* TAG_NS = "dab_sync";
 
   constexpr const char* TAG_SYMBOL = "symbol";
+
+  constexpr const char* TAG_CU = "cu";
 
   struct kin_t {
     int k;

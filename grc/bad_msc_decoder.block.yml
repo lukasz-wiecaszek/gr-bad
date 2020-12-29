@@ -1,0 +1,74 @@
+id: bad_msc_decoder
+label: msc_decoder
+category: '[bad]'
+
+templates:
+  imports: import bad
+  make: |-
+    bad.msc_decoder()
+    % if type == 'bad.PROTECTION_TYPE_UEP':
+    self.${id}.set_uep_params(${subch_start_addr}, ${table_index})
+    % endif
+    % if type == 'bad.PROTECTION_TYPE_EEP_A':
+    self.${id}.set_eep_a_params(${subch_start_addr}, ${subch_size}, ${protection_level})
+    % endif
+    % if type == 'bad.PROTECTION_TYPE_EEP_B':
+    self.${id}.set_eep_b_params(${subch_start_addr}, ${subch_size}, ${protection_level})
+    % endif
+  callbacks:
+  - self.${id}.set_uep_params(${subch_start_addr}, ${table_index})
+  - self.${id}.set_eep_a_params(${subch_start_addr}, ${subch_size}, ${protection_level})
+  - self.${id}.set_eep_b_params(${subch_start_addr}, ${subch_size}, ${protection_level})
+
+#  Make one 'parameters' list entry for every parameter you want settable from the GUI.
+#     Keys include:
+#     * id (makes the value accessible as \$keyname, e.g. in the make entry)
+#     * label (label shown in the GUI)
+#     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+parameters:
+- id: type
+  label: Protection Type
+  dtype: enum
+  options: [bad.PROTECTION_TYPE_UEP, bad.PROTECTION_TYPE_EEP_A, bad.PROTECTION_TYPE_EEP_B]
+  option_labels: [UEP, EEP_A, EEP_B]
+
+- id: subch_start_addr
+  label: Subchannel start
+  dtype: int
+
+- id: subch_size
+  label: Subchannel size
+  dtype: int
+  hide: ${ ('none' if type != 'bad.PROTECTION_TYPE_UEP' else 'all') }
+
+- id: protection_level
+  label: Protection level
+  dtype: int
+  hide: ${ ('none' if type != 'bad.PROTECTION_TYPE_UEP' else 'all') }
+
+- id: table_index
+  label: Table index
+  dtype: int
+  hide: ${ ('none' if type == 'bad.PROTECTION_TYPE_UEP' else 'all') }
+
+
+#  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
+#  Keys include:
+#      * label (an identifier for the GUI)
+#      * domain (optional - stream or message. Default is stream)
+#      * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
+#      * vlen (optional - data stream vector length. Default is 1)
+#      * optional (optional - set to 1 for optional inputs. Default is 0)
+inputs:
+- label: in
+  dtype: float
+  vlen: 3072
+
+outputs:
+- label: out
+  dtype: byte
+  vlen: 1
+
+#  'file_format' specifies the version of the GRC yml format used in the file
+#  and should usually not be changed.
+file_format: 1

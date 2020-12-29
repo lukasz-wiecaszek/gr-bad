@@ -50,6 +50,8 @@ namespace gr {
 
       static int ivlen(protection_type_e type, int index, int n);
       static int ovlen(protection_type_e type, int index, int n);
+
+      virtual int I() const = 0;
     };
 
   } // namespace bad

@@ -37,6 +37,11 @@ namespace gr {
       convolutional_decoder_impl(protection_type_e type, int index, int n);
       ~convolutional_decoder_impl();
 
+      int I() const override
+      {
+        return d_I;
+      }
+
     };
 
   } // namespace bad

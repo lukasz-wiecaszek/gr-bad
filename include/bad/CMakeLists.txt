@@ -44,6 +44,7 @@ install(FILES
     time_deinterleaver.h
     fifo_sink.h
     ofdm_fine_frequency_correction.h
-    fic_decoder.h DESTINATION
+    fic_decoder.h
+    msc_decoder.h DESTINATION
       include/bad
 )

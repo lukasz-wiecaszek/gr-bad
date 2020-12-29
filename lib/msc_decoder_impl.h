@@ -18,10 +18,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_FIC_DECODER_IMPL_H
-#define INCLUDED_BAD_FIC_DECODER_IMPL_H
+#ifndef INCLUDED_BAD_MSC_DECODER_IMPL_H
+#define INCLUDED_BAD_MSC_DECODER_IMPL_H
 
-#include <bad/fic_decoder.h>
+#include <bad/msc_decoder.h>
 #include "dab_parameters.h"
 
 #define IVLEN0 OFDM_SYMBOL_BITS
@@ -31,19 +31,23 @@ namespace gr {
   namespace bad {
 
     template<typename ITYPE0, typename OTYPE0>
-    class fic_decoder_impl : public fic_decoder
+    class msc_decoder_impl : public msc_decoder
     {
     private:
-      void set(protection_type_e type = PROTECTION_TYPE_FIC, int index = 0, int n = 0);
+      void set(protection_type_e type, int subch_start_addr, int subch_size, int index, int n);
 
     public:
-      fic_decoder_impl();
-      ~fic_decoder_impl();
+      msc_decoder_impl();
+      ~msc_decoder_impl();
+
+      void set_uep_params(int subch_start_addr, int table_index) override;
+      void set_eep_a_params(int subch_start_addr, int subch_size, int protection_level) override;
+      void set_eep_b_params(int subch_start_addr, int subch_size, int protection_level) override;
 
     };
 
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_FIC_DECODER_IMPL_H */
+#endif /* INCLUDED_BAD_MSC_DECODER_IMPL_H */
 

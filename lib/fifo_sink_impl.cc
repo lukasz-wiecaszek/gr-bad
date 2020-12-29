@@ -22,6 +22,8 @@
 #include "config.h"
 #endif
 
+#include <sstream>
+
 #include <gnuradio/io_signature.h>
 #include "fifo_sink_impl.h"
 
