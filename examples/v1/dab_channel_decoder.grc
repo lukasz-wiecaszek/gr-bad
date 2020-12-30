@@ -406,7 +406,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: fic.txt
+    file: fic.dat
     type: byte
     unbuffered: 'False'
     vlen: '1'
@@ -424,7 +424,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: msc.txt
+    file: msc.fifo
     type: byte
     unbuffered: 'False'
     vlen: '1'

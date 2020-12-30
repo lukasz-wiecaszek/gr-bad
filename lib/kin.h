@@ -18,8 +18,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_BAD_DAB_PARAMETERS_H
-#define INCLUDED_BAD_DAB_PARAMETERS_H
+#ifndef INCLUDED_BAD_KIN_H
+#define INCLUDED_BAD_KIN_H
 
 namespace gr {
   namespace bad {
@@ -30,6 +30,7 @@ namespace gr {
       int n;
     };
 
+    /* Relation between the indicies i, k' and n and the carrier index k for transmission mode I */
     constexpr kin_t kin[] = {
       {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1},
       {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1}, {-768, 0, 1},
@@ -274,6 +275,7 @@ namespace gr {
       { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1}, { 737, 1, 1},
     };
 
+    /* Time-Frequency-Phase parameter h values */
     constexpr int h[4][32] = {
       {0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 2, 2, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 2, 2, 1, 1},
       {0, 3, 2, 3, 0, 1, 3, 0, 2, 1, 2, 3, 2, 3, 3, 0, 0, 3, 2, 3, 0, 1, 3, 0, 2, 1, 2, 3, 2, 3, 3, 0},
@@ -284,5 +286,5 @@ namespace gr {
   } // namespace bad
 } // namespace gr
 
-#endif /* INCLUDED_BAD_DAB_PARAMETERS_H */
+#endif /* INCLUDED_BAD_KIN_H */
 
