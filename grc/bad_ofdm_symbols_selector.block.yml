@@ -4,7 +4,14 @@ category: '[bad]'
 
 templates:
   imports: import bad
-  make: bad.ofdm_symbols_selector(${first}, ${count})
+  make: |-
+    bad.ofdm_symbols_selector()
+    % if mode == 'bad.fic':
+    self.${id}.select_fic_symbols()
+    % endif
+    % if mode == 'bad.msc':
+    self.${id}.select_msc_symbols()
+    % endif
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -12,13 +19,11 @@ templates:
 #     * label (label shown in the GUI)
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 parameters:
-- id: first
-  label: First symbol
-  dtype: int
-
-- id: count
-  label: Number of symbols
-  dtype: int
+- id: mode
+  label: Mode
+  dtype: enum
+  options: [bad.fic, bad.msc]
+  option_labels: [fic, msc]
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
 #  Keys include:

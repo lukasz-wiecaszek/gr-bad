@@ -45,7 +45,22 @@ namespace gr {
        * class. bad::ofdm_symbols_selector::make is the public interface for
        * creating new instances.
        */
-      static sptr make(int first, int count);
+      static sptr make();
+
+      /*! \brief Selects defined sequence of symbols.
+       *
+       * \param first First symbol to be selected.
+       * \param count Number of symbols in the selected sequence.
+       */
+      virtual void select_symbols(int first, int count) = 0;
+
+      /*! \brief Selects fic (1 .. 3) symbols.
+       */
+      virtual void select_fic_symbols() = 0;
+
+      /*! \brief Selects msc (4 .. 72) symbols.
+       */
+      virtual void select_msc_symbols() = 0;
     };
 
   } // namespace bad

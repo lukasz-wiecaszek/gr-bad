@@ -30,19 +30,19 @@ namespace gr {
   namespace bad {
 
     ofdm_symbols_selector::sptr
-    ofdm_symbols_selector::make(int first, int count)
+    ofdm_symbols_selector::make()
     {
       return gnuradio::get_initial_sptr
-        (new ofdm_symbols_selector_impl<float, float>(first, count));
+        (new ofdm_symbols_selector_impl<float, float>());
     }
 
     template<typename ITYPE0, typename OTYPE0>
-    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::ofdm_symbols_selector_impl(int first, int count)
+    ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::ofdm_symbols_selector_impl()
       : gr::block("ofdm_symbols_selector",
                   gr::io_signature::make(1, 1, sizeof(ITYPE0) * IVLEN0),
                   gr::io_signature::make(1, 1, sizeof(OTYPE0) * OVLEN0)),
-        d_first(first),
-        d_count(count)
+        d_first(0),
+        d_count(0)
     {
       set_tag_propagation_policy(TPP_DONT);
     }
@@ -50,6 +50,27 @@ namespace gr {
     template<typename ITYPE0, typename OTYPE0>
     ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::~ofdm_symbols_selector_impl()
     {
+    }
+
+    template<typename ITYPE0, typename OTYPE0>
+    void ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::select_symbols(int first, int count)
+    {
+        d_first = first;
+        d_count = count;
+    }
+
+    template<typename ITYPE0, typename OTYPE0>
+    void ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::select_fic_symbols()
+    {
+        d_first = 1;
+        d_count = 3;
+    }
+
+    template<typename ITYPE0, typename OTYPE0>
+    void ofdm_symbols_selector_impl<ITYPE0, OTYPE0>::select_msc_symbols()
+    {
+        d_first = 4;
+        d_count = 72;
     }
 
     template<typename ITYPE0, typename OTYPE0>

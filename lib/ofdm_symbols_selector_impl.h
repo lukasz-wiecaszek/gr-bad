@@ -38,8 +38,12 @@ namespace gr {
       int d_count;
 
     public:
-      ofdm_symbols_selector_impl(int first, int count);
+      ofdm_symbols_selector_impl();
       ~ofdm_symbols_selector_impl();
+
+      void select_symbols(int first, int count) override;
+      void select_fic_symbols() override;
+      void select_msc_symbols() override;
 
       void forecast(int noutput_items, gr_vector_int &ninput_items_required);
 
