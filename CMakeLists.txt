@@ -158,11 +158,3 @@ add_subdirectory(docs)
 add_subdirectory(swig)
 add_subdirectory(python)
 add_subdirectory(grc)
-
-########################################################################
-# Install cmake search helper for this library
-########################################################################
-
-install(FILES cmake/Modules/badConfig.cmake
-    DESTINATION ${CMAKE_MODULES_DIR}/bad
-)
