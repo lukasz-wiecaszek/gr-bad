@@ -50,14 +50,11 @@ namespace gr {
     {
       set_output_multiple((2 * TNULL) + 1);
       set_tag_propagation_policy(TPP_DONT);
-
-      printf("constructor\n");
     }
 
     template<typename ITYPE0, typename OTYPE0>
     ofdm_fine_frequency_estimation_impl<ITYPE0, OTYPE0>::~ofdm_fine_frequency_estimation_impl()
     {
-      printf("destructor\n");
     }
 
     template<typename ITYPE0, typename OTYPE0>

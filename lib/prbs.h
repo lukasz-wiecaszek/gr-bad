@@ -23,16 +23,32 @@
 
 #include <array>
 #include <memory>
+#include <type_traits>
 
 namespace gr {
   namespace bad {
 
-    template<typename T>
+    template<typename T, unsigned... POLYNOMIAL>
     class prbs
     {
+      static_assert(std::is_integral<T>::value, "T shall be an integral type");
+
     private:
+      static constexpr std::array<unsigned, sizeof...(POLYNOMIAL)> polynomial{POLYNOMIAL...};
+
+      static constexpr unsigned polynomial_degree()
+      {
+        unsigned degree = 0;
+
+        for(std::size_t i = 0; i < sizeof...(POLYNOMIAL); ++i)
+          if(polynomial[i] > degree)
+            degree = polynomial[i];
+
+        return degree;
+      }
+
       int d_length;
-      std::array<T, 9> d_FSR; // feedback shift register
+      std::array<T, polynomial_degree()> d_FSR; // feedback shift register
       std::unique_ptr<T[]> d_PRBS;
 
     public:
@@ -41,12 +57,10 @@ namespace gr {
          d_FSR{},
          d_PRBS{new T[length]}
       {
-        // Initial state: 111111111
-        d_FSR.fill(1);
+        d_FSR.fill(1); // initial state
 
-        // Polynomial: X^9 + X^5 + 1
         for (int i = 0; i < length; ++i) {
-          T x = d_FSR[8] ^ d_FSR[4];
+          T x = XOR();
           std::rotate(d_FSR.rbegin(), d_FSR.rbegin() + 1, d_FSR.rend());
           d_PRBS[i] = d_FSR[0] = x;
         }
@@ -60,6 +74,15 @@ namespace gr {
       int length() const
       {
         return d_length;
+      }
+
+    private:
+      T XOR() const
+      {
+        T x = 0;
+        for (unsigned i : polynomial)
+          x ^= d_FSR[i - 1];
+        return x;
       }
     };
 

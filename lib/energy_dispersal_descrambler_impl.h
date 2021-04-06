@@ -34,7 +34,7 @@ namespace gr {
     {
       static_assert(std::is_same<ITYPE0, OTYPE0>::value, "Input and output types need to be the same");
     private:
-      prbs<OTYPE0> d_prbs;
+      prbs<OTYPE0, 9, 5> d_prbs; // Polynomial: X^9 + X^5 + 1
 
     public:
       energy_dispersal_descrambler_impl(int vlen);
